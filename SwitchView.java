@@ -12,7 +12,7 @@ import android.view.MotionEvent;
 import android.view.View;
 
 /**
- * For details, please see <b>http://blog.csdn.net/bfbx5173/article/details/45191147<b>
+ * For details, please see <b>http://blog.csdn.net/bfbx5173/article/details/45191147<b> 
  * @author else
  */
 public class SwitchView extends View {
