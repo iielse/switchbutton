@@ -50,10 +50,6 @@ viewSwitch.setOnStateChangedListener(new OnStateChangedListener() {
 ##更加详细的源码分析
 [请戳这里](http://blog.csdn.net/bfbx5173/article/details/45191147) 
 
-##有问题反馈
-在使用中有任何问题，欢迎反馈给我，可以用以下联系方式跟我交流  
-* QQ: 517309507
-
 ##感激
 感谢这位朋友
 
