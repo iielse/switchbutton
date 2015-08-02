@@ -69,4 +69,4 @@ viewSwitch.setOnStateChangedListener(new OnStateChangedListener() {
 * [aigeStudio](http://blog.csdn.net/aigestudio) 
 
 ##其它
-在兴趣的驱动下,写一个`免费`的东西，有欣喜，也还有汗水，希望你喜欢我的作品，同时也能支持一下。
+希望你喜欢我的作品，帮忙`Star`一下。
