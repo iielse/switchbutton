@@ -8,8 +8,10 @@ import android.graphics.RadialGradient;
 import android.graphics.RectF;
 import android.graphics.Shader;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.animation.AccelerateInterpolator;
 
 /**
  * For details, please see <b>http://blog.csdn.net/bfbx5173/article/details/45191147<b> 
@@ -23,7 +25,8 @@ public class SwitchView extends View {
 	private final RectF bRectF = new RectF();
 	private float sAnim, bAnim;
 	private RadialGradient shadowGradient;
-
+	private final AccelerateInterpolator aInterpolator = new AccelerateInterpolator(2);
+	
 	/**
 	 * state switch on
 	 */
@@ -200,9 +203,12 @@ public class SwitchView extends View {
 
 		sAnim = sAnim - 0.1f > 0 ? sAnim - 0.1f : 0;
 		bAnim = bAnim - 0.1f > 0 ? bAnim - 0.1f : 0;
+		
+		final float dsAnim = aInterpolator.getInterpolation(sAnim);
+		final float dbAnim = aInterpolator.getInterpolation(bAnim);
 		// draw background animation
-		final float scale = sScale * (isOn ? sAnim : 1 - sAnim);
-		final float scaleOffset = (bOnLeftX + bRadius - sCenterX) * (isOn ? 1 - sAnim : sAnim);
+		final float scale = sScale * (isOn ? dsAnim : 1 - dsAnim);
+		final float scaleOffset = (bOnLeftX + bRadius - sCenterX) * (isOn ? 1 - dsAnim : dsAnim);
 		canvas.save();
 		canvas.scale(scale, scale, sCenterX + scaleOffset, sCenterY);
 		paint.setColor(0xffffffff);
@@ -210,10 +216,9 @@ public class SwitchView extends View {
 		canvas.restore();
 		// draw center bar
 		canvas.save();
-		canvas.translate(calcBTranslate(bAnim), shadowHeight);
+		canvas.translate(calcBTranslate(dbAnim), shadowHeight);
 		final boolean isState2 = (state == STATE_SWITCH_ON2 || state == STATE_SWITCH_OFF2);
-		final float percent = (isState2 ? 1 - bAnim : bAnim);
-		calcBPath(percent);
+		calcBPath(isState2 ? 1 - dbAnim : dbAnim);
 		// draw shadow
 		paint.setStyle(Style.FILL);
 		paint.setColor(0xff333333);
