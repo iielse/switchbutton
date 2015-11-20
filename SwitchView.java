@@ -7,13 +7,16 @@ import android.graphics.Path;
 import android.graphics.RadialGradient;
 import android.graphics.RectF;
 import android.graphics.Shader;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.animation.AccelerateInterpolator;
 
 /**
- * For details, please see <b>http://blog.csdn.net/bfbx5173/article/details/45191147<b> 
+ * For details, please see <b>http://blog.csdn.net/bfbx5173/article/details/45191147<b>
+ *
  * @author else
  */
 public class SwitchView extends View {
@@ -25,21 +28,21 @@ public class SwitchView extends View {
 	private float sAnim, bAnim;
 	private RadialGradient shadowGradient;
 	private final AccelerateInterpolator aInterpolator = new AccelerateInterpolator(2);
-	
+
 	/**
 	 * state switch on
 	 */
 	public static final int STATE_SWITCH_ON = 4;
 	/**
-	 * state prepare to off 
+	 * state prepare to off
 	 */
 	public static final int STATE_SWITCH_ON2 = 3;
 	/**
-	 * state prepare to on 
+	 * state prepare to on
 	 */
 	public static final int STATE_SWITCH_OFF2 = 2;
 	/**
-	 * state prepare to off 
+	 * state prepare to off
 	 */
 	public static final int STATE_SWITCH_OFF = 1;
 	/**
@@ -50,6 +53,8 @@ public class SwitchView extends View {
 	 * last state
 	 */
 	private int lastState = state;
+
+	private boolean isOpened = false;
 
 	private int mWidth, mHeight;
 	private float sWidth, sHeight;
@@ -74,13 +79,15 @@ public class SwitchView extends View {
 		setLayerType(LAYER_TYPE_SOFTWARE, null);
 	}
 
-	@Override protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+	@Override
+	protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
 		int widthSize = MeasureSpec.getSize(widthMeasureSpec);
 		int heightSize = (int) (widthSize * 0.65f);
 		setMeasuredDimension(widthSize, heightSize);
 	}
 
-	@Override protected void onSizeChanged(int w, int h, int oldw, int oldh) {
+	@Override
+	protected void onSizeChanged(int w, int h, int oldw, int oldh) {
 		super.onSizeChanged(w, h, oldw, oldh);
 		mWidth = w;
 		mHeight = h;
@@ -140,58 +147,59 @@ public class SwitchView extends View {
 		float result = 0;
 		int wich = state - lastState;
 		switch (wich) {
-		case 1:
-			// off -> off2
-			if (state == STATE_SWITCH_OFF2) {
-				result = bOff2LeftX - (bOff2LeftX - bOffLeftX) * percent;
-			}
-			// on2 -> on
-			else if (state == STATE_SWITCH_ON) {
-				result = bOnLeftX - (bOnLeftX - bOn2LeftX) * percent;
-			}
-			break;
-		case 2:
-			// off2 -> on
-			if (state == STATE_SWITCH_ON) {
-				result = bOnLeftX - (bOnLeftX - bOff2LeftX) * percent;
-			}
-			// off -> on2
-			else if (state == STATE_SWITCH_ON) {
-				result = bOn2LeftX - (bOn2LeftX - bOffLeftX) * percent;
-			}
-			break;
-		case 3: // off -> on
-			result = bOnLeftX - (bOnLeftX - bOffLeftX) * percent;
-			break;
-		case -1:
-			// on -> on2
-			if (state == STATE_SWITCH_ON2) {
-				result = bOn2LeftX + (bOnLeftX - bOn2LeftX) * percent;
-			}
-			// off2 -> off
-			else if (state == STATE_SWITCH_OFF) {
-				result = bOffLeftX + (bOff2LeftX - bOffLeftX) * percent;
-			}
-			break;
-		case -2:
-			// on2 -> off
-			if (state == STATE_SWITCH_OFF) {
-				result = bOffLeftX + (bOn2LeftX - bOffLeftX) * percent;
-			}
-			// on -> off2
-			else if (state == STATE_SWITCH_OFF2) {
-				result = bOff2LeftX + (bOnLeftX - bOff2LeftX) * percent;
-			}
-			break;
-		case -3: // on -> off
-			result = bOffLeftX + (bOnLeftX - bOffLeftX) * percent;
-			break;
+			case 1:
+				// off -> off2
+				if (state == STATE_SWITCH_OFF2) {
+					result = bOff2LeftX - (bOff2LeftX - bOffLeftX) * percent;
+				}
+				// on2 -> on
+				else if (state == STATE_SWITCH_ON) {
+					result = bOnLeftX - (bOnLeftX - bOn2LeftX) * percent;
+				}
+				break;
+			case 2:
+				// off2 -> on
+				if (state == STATE_SWITCH_ON) {
+					result = bOnLeftX - (bOnLeftX - bOff2LeftX) * percent;
+				}
+				// off -> on2
+				else if (state == STATE_SWITCH_ON) {
+					result = bOn2LeftX - (bOn2LeftX - bOffLeftX) * percent;
+				}
+				break;
+			case 3: // off -> on
+				result = bOnLeftX - (bOnLeftX - bOffLeftX) * percent;
+				break;
+			case -1:
+				// on -> on2
+				if (state == STATE_SWITCH_ON2) {
+					result = bOn2LeftX + (bOnLeftX - bOn2LeftX) * percent;
+				}
+				// off2 -> off
+				else if (state == STATE_SWITCH_OFF) {
+					result = bOffLeftX + (bOff2LeftX - bOffLeftX) * percent;
+				}
+				break;
+			case -2:
+				// on2 -> off
+				if (state == STATE_SWITCH_OFF) {
+					result = bOffLeftX + (bOn2LeftX - bOffLeftX) * percent;
+				}
+				// on -> off2
+				else if (state == STATE_SWITCH_OFF2) {
+					result = bOff2LeftX + (bOnLeftX - bOff2LeftX) * percent;
+				}
+				break;
+			case -3: // on -> off
+				result = bOffLeftX + (bOnLeftX - bOffLeftX) * percent;
+				break;
 		}
 
 		return result - bOffLeftX;
 	}
 
-	@Override protected void onDraw(Canvas canvas) {
+	@Override
+	protected void onDraw(Canvas canvas) {
 		super.onDraw(canvas);
 		paint.setAntiAlias(true);
 		final boolean isOn = (state == STATE_SWITCH_ON || state == STATE_SWITCH_ON2);
@@ -202,7 +210,7 @@ public class SwitchView extends View {
 
 		sAnim = sAnim - 0.1f > 0 ? sAnim - 0.1f : 0;
 		bAnim = bAnim - 0.1f > 0 ? bAnim - 0.1f : 0;
-		
+
 		final float dsAnim = aInterpolator.getInterpolation(sAnim);
 		final float dbAnim = aInterpolator.getInterpolation(bAnim);
 		// draw background animation
@@ -243,71 +251,75 @@ public class SwitchView extends View {
 		if (sAnim > 0 || bAnim > 0) invalidate();
 	}
 
-	@Override public boolean onTouchEvent(MotionEvent event) {
+	@Override
+	public boolean onTouchEvent(MotionEvent event) {
 		if ((state == STATE_SWITCH_ON || state == STATE_SWITCH_OFF) && (sAnim * bAnim == 0)) {
 			switch (event.getAction()) {
-			case MotionEvent.ACTION_DOWN:
-				return true;
-			case MotionEvent.ACTION_CANCEL:
-			case MotionEvent.ACTION_UP:
-				lastState = state;
-				if (state == STATE_SWITCH_OFF) {
-					refreshState(STATE_SWITCH_OFF2);
-				}
-				else if (state == STATE_SWITCH_ON) {
-					refreshState(STATE_SWITCH_ON2);
-				}
-				bAnim = 1;
-				invalidate();
-				if (listener != null) {
+				case MotionEvent.ACTION_DOWN:
+					return true;
+				case MotionEvent.ACTION_CANCEL:
+				case MotionEvent.ACTION_UP:
+					lastState = state;
+					if (state == STATE_SWITCH_OFF) {
+						refreshState(STATE_SWITCH_OFF2);
+					} else if (state == STATE_SWITCH_ON) {
+						refreshState(STATE_SWITCH_ON2);
+					}
+					bAnim = 1;
+					invalidate();
+
 					if (state == STATE_SWITCH_OFF2) {
-						listener.toggleToOn();
+						listener.toggleToOn(this);
+					} else if (state == STATE_SWITCH_ON2) {
+						listener.toggleToOff(this);
 					}
-					else if (state == STATE_SWITCH_ON2) {
-						listener.toggleToOff();
-					}
-				}
-				break;
+					break;
 			}
 		}
 		return super.onTouchEvent(event);
 	}
 
 	private void refreshState(int newState) {
+		if (!isOpened && newState == STATE_SWITCH_ON) {
+			isOpened = true;
+		} else if (isOpened && newState == STATE_SWITCH_OFF) {
+			isOpened = false;
+		}
 		lastState = state;
 		state = newState;
 		postInvalidate();
 	}
 
 	/**
-	 * 
 	 * @return the state of switch view
 	 */
-	public int getState() {
-		return state;
+	public boolean isOpened() {
+		return isOpened;
 	}
 
 	/**
 	 * if set true , the state change to on;
 	 * if set false, the state change to off
-	 * @param isOn
+	 *
+	 * @param isOpened
 	 */
-	public void setState(boolean isOn) {
-		final int wich = isOn ? STATE_SWITCH_ON : STATE_SWITCH_OFF;
-		refreshState(wich);
+	public void setOpened(boolean isOpened) {
+		refreshState(isOpened ? STATE_SWITCH_ON : STATE_SWITCH_OFF);
 	}
 
 	/**
 	 * if set true , the state change to on;
 	 * if set false, the state change to off
 	 * <br><b>change state with animation</b>
-	 * @param letItOn
+	 *
+	 * @param isOpened
 	 */
-	public void toggleSwitch(boolean letItOn) {
-		final int wich = letItOn ? STATE_SWITCH_ON : STATE_SWITCH_OFF;
+	public void toggleSwitch(final boolean isOpened) {
+		this.isOpened = isOpened;
 		postDelayed(new Runnable() {
-			@Override public void run() {
-				toggleSwitch(wich);
+			@Override
+			public void run() {
+				toggleSwitch(isOpened ? STATE_SWITCH_ON : STATE_SWITCH_OFF);
 			}
 		}, 300);
 	}
@@ -324,18 +336,19 @@ public class SwitchView extends View {
 	}
 
 	public interface OnStateChangedListener {
-		void toggleToOn();
+		void toggleToOn(View view);
 
-		void toggleToOff();
+		void toggleToOff(View view);
 	}
 
 	private OnStateChangedListener listener = new OnStateChangedListener() {
-
-		@Override public void toggleToOn() {
+		@Override
+		public void toggleToOn(View view) {
 			toggleSwitch(STATE_SWITCH_ON);
 		}
 
-		@Override public void toggleToOff() {
+		@Override
+		public void toggleToOff(View view) {
 			toggleSwitch(STATE_SWITCH_OFF);
 		}
 	};
@@ -343,5 +356,40 @@ public class SwitchView extends View {
 	public void setOnStateChangedListener(OnStateChangedListener listener) {
 		if (listener == null) throw new IllegalArgumentException("empty listener");
 		this.listener = listener;
+	}
+
+	@Override
+	public Parcelable onSaveInstanceState() {
+		Parcelable superState = super.onSaveInstanceState();
+		SavedState ss = new SavedState(superState);
+		ss.isOpened = isOpened;
+		return ss;
+	}
+
+	@Override
+	public void onRestoreInstanceState(Parcelable state) {
+		SavedState ss = (SavedState) state;
+		super.onRestoreInstanceState(ss.getSuperState());
+		this.isOpened = ss.isOpened;
+		this.state = this.isOpened ? STATE_SWITCH_ON : STATE_SWITCH_OFF;
+	}
+
+	static final class SavedState extends BaseSavedState {
+		private boolean isOpened;
+
+		SavedState(Parcelable superState) {
+			super(superState);
+		}
+
+		private SavedState(Parcel in) {
+			super(in);
+			isOpened = 1 == in.readInt();
+		}
+
+		@Override
+		public void writeToParcel(Parcel out, int flags) {
+			super.writeToParcel(out, flags);
+			out.writeInt(isOpened ? 1 : 0);
+		}
 	}
 }

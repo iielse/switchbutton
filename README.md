@@ -23,13 +23,13 @@ After inserting, the effect of SwitchView will present it like followings:
 
 ![image](https://github.com/iielse/SwitchView/blob/HEAD/effect/1.gif)
 
-你可以通过在代码中调用`setState()` 设置当前的状态。
+你可以通过在代码中调用`setOpened(boolean isOpened)` 设置当前的状态。
 
-you can set up the current status by invoking `setState()` within the codes
+you can set up the current status by invoking `setOpened(boolean isOpened)` within the codes
 
-也可以根据`getState()` 获得当前的状态。通常情况下值为`STATE_SWITCH_ON`或者`STATE_SWITCH_OFF`
+也可以根据`isOpened()` 获得当前的状态。
 
-you can also acquire the status according to `getState()`.   Generally, the volume shall be `STATE_SWITCH_ON` or `STATE_SWITCH_OFF`.
+you can also acquire the status according to `isOpened()`.
 
 ##高级用法 Advanced usage
 * 支持开关的'延时操作'。就像这样: support the delay operation of the switch. like this:
@@ -41,7 +41,7 @@ in order to get the wanted effect, you need open the activity:
 ```
 final SwitchView viewSwitch = (SwitchView) findViewById(R.id.view_switch);
 // 设置初始状态。true为开;false为关[默认]。set up original status. true for open and false for close[default]
-viewSwitch.setState(true); 
+viewSwitch.setOpened(true);
 viewSwitch.setOnStateChangedListener(new OnStateChangedListener() {
     @Override public void toggleToOn(View view) {
     	// 原本为关闭的状态，被点击后 originally present close status after clicking
