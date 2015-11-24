@@ -257,7 +257,6 @@ public class SwitchView extends View {
 			switch (event.getAction()) {
 				case MotionEvent.ACTION_DOWN:
 					return true;
-				case MotionEvent.ACTION_CANCEL:
 				case MotionEvent.ACTION_UP:
 					lastState = state;
 					if (state == STATE_SWITCH_OFF) {
