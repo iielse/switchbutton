@@ -1,9 +1,8 @@
 # SwitchView
 
-![image](https://github.com/iielse/SwitchButton/tree/master/previews/12345.jpg)
-![image](https://github.com/iielse/SwitchButton/tree/master/previews/23456.jpg)
-![image](https://github.com/iielse/SwitchButton/tree/master/previews/34567.jpg)
-![image](https://github.com/iielse/SwitchButton/tree/master/previews/45678.jpg)
+![](https://github.com/iielse/SwitchButton/blob/master/previews/12345.png) ![](https://github.com/iielse/SwitchButton/blob/master/previews/23456.png)
+![](https://github.com/iielse/SwitchButton/blob/master/previews/34567.png)
+![](https://github.com/iielse/SwitchButton/blob/master/previews/45678.png)
 
 ## Download
 
