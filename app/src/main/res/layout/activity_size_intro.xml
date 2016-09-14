@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    android:orientation="vertical">
+
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.AppBarOverlay">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            app:navigationIcon="@mipmap/common_back_white"
+            app:title="关于尺寸大小的说明"/>
+
+    </android.support.design.widget.AppBarLayout>
+
+
+    <ScrollView
+        android:id="@+id/v_scroll"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#FFFFFF"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+
+                android:orientation="horizontal"
+                android:padding="10dip">
+
+                <FrameLayout
+                    android:id="@+id/l_2_1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#CCC">
+
+                    <ch.ielse.view.SwitchView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+                </FrameLayout>
+
+                <TextView
+                    android:id="@+id/t_2_1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/l_2_1"
+                    android:text="如果是wrap_content且父亲提供空间够大，宽度将按56dip(作为默认大小)处理"/>
+
+
+                <FrameLayout
+                    android:id="@+id/l_2_2"
+                    android:layout_width="40dip"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/t_2_1"
+                    android:background="#CCC">
+
+                    <ch.ielse.view.SwitchView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+                </FrameLayout>
+
+                <TextView
+                    android:id="@+id/t_2_2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/l_2_2"
+                    android:text="如果是wrap_content且空间不够的话会比例缩小"/>
+
+                <FrameLayout
+                    android:id="@+id/l_3_1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/t_2_2"
+                    android:background="#CCC">
+
+                    <ch.ielse.view.SwitchView
+                        android:layout_width="100dip"
+                        android:layout_height="100dip"/>
+                </FrameLayout>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/l_3_1"
+                    android:text="如果是宽100dip高100dip，灰色为SwitchView占有区域，所以点击灰色区域就会切换SwitchView，但显示依旧按照比例"/>
+
+            </RelativeLayout>
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dip"
+                android:text="没有特别大小定制需求设置wrap_content即可\n如果要调节大小推荐layout_width='62dip' layout_height='wrap_content'这样设置"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:padding="10dip">
+
+                <ch.ielse.view.SwitchView
+                    android:layout_width="30dip"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dip"/>
+
+                <ch.ielse.view.SwitchView
+                    android:layout_width="40dip"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dip"/>
+
+                <ch.ielse.view.SwitchView
+                    android:layout_width="50dip"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dip"/>
+
+                <ch.ielse.view.SwitchView
+                    android:layout_width="60dip"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dip"/>
+
+            </LinearLayout>
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dip"
+                android:text="padding支持 设置了padding可以使SwitchView更容易被点击到\n以下SwitchView设置了padding='10dip' \nps:如果你设置的paddingLeft+paddingRight要大于等于当前SwitchView的width，那么就不会显示在界面上."/>
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dip"
+                android:background="#0FC">
+
+                <ch.ielse.view.SwitchView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="20dip"/>
+            </RelativeLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
+</LinearLayout>
