@@ -42,7 +42,7 @@ public class ListActivity extends AppCompatActivity {
 
     private static class ItemListAdapter extends BaseAdapter {
 
-        List<ItemObject> mDataList = new ArrayList<>();
+        List<ItemObject> mDataList = new ArrayList<ItemObject>();
 
         public void set() {
             mDataList.clear();

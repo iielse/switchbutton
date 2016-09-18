@@ -43,7 +43,7 @@ public class RecyclerActivity extends AppCompatActivity {
 
     private static class ItemListAdapter extends RecyclerView.Adapter {
 
-        List<ItemObject> mDataList = new ArrayList<>();
+        List<ItemObject> mDataList = new ArrayList<ItemObject>();
 
         public void set() {
             mDataList.clear();
