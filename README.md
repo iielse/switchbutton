@@ -20,7 +20,7 @@
 ```
 3. activity
 
-![](https://github.com/iielse/SwitchButton/blob/master/previews/a.png)
+![](https://github.com/iielse/SwitchButton/blob/master/previews/a.gif)
 
 ```
 switchView.setOnClickListener(new View.OnClickListener() {
@@ -32,8 +32,8 @@ switchView.setOnClickListener(new View.OnClickListener() {
 ```
 or
 
-![](https://github.com/iielse/SwitchButton/blob/master/previews/b.png)
-![](https://github.com/iielse/SwitchButton/blob/master/previews/c.png)
+![](https://github.com/iielse/SwitchButton/blob/master/previews/b.gif)
+![](https://github.com/iielse/SwitchButton/blob/master/previews/c.gif)
 
 ```
 switchView.setOnStateChangedListener(new SwitchView.OnStateChangedListener() {
