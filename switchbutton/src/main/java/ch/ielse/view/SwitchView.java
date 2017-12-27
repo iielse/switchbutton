@@ -1,10 +1,10 @@
 package ch.ielse.view;
 
-import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.RadialGradient;
@@ -20,14 +20,11 @@ import android.view.View;
 import android.view.animation.AccelerateInterpolator;
 
 /**
- * QQ Group 274306954
+ * hei hei hei
  */
 public class SwitchView extends View {
-    private final int DEFAULT_COLOR_PRIMARY = 0xFF4BD763;
-    private final int DEFAULT_COLOR_PRIMARY_DARK = 0xFF3AC652;
-    private final float RATIO_ASPECT = 0.68f;
-    private final float ANIMATION_SPEED = 0.1f; // (0,1]
-    private static final int STATE_SWITCH_ON = 4; // you change value you die
+
+    private static final int STATE_SWITCH_ON = 4;
     private static final int STATE_SWITCH_ON2 = 3;
     private static final int STATE_SWITCH_OFF2 = 2;
     private static final int STATE_SWITCH_OFF = 1;
@@ -40,30 +37,30 @@ public class SwitchView extends View {
     private float sAnim, bAnim;
     private RadialGradient shadowGradient;
 
+    protected float ratioAspect = 0.68f; // (0,1]
+    protected float animationSpeed = 0.1f; // (0,1]
+
     private int state;
     private int lastState;
     private boolean isCanVisibleDrawing = false;
     private OnClickListener mOnClickListener;
-    private int colorPrimary;
-    private int colorPrimaryDark;
-    private boolean hasShadow;
-    private boolean isOpened;
+    protected int colorPrimary;
+    protected int colorPrimaryDark;
+    protected int colorOff;
+    protected int colorOffDark;
+    protected int colorShadow;
+    protected boolean hasShadow;
+    protected boolean isOpened;
 
-    private int mWidth, mHeight;
-    private int actuallyDrawingAreaLeft;
-    private int actuallyDrawingAreaRight;
-    private int actuallyDrawingAreaTop;
-    private int actuallyDrawingAreaBottom;
-
-    private float sWidth, sHeight;
-    private float sLeft, sTop, sRight, sBottom;
+    private float sRight;
     private float sCenterX, sCenterY;
     private float sScale;
 
     private float bOffset;
     private float bRadius, bStrokeWidth;
     private float bWidth;
-    private float bLeft, bTop, bRight, bBottom;
+    private float bLeft;
+    private float bRight;
     private float bOnLeftX, bOn2LeftX, bOff2LeftX, bOffLeftX;
 
     private float shadowReservedHeight;
@@ -77,9 +74,16 @@ public class SwitchView extends View {
         super(context, attrs);
         setLayerType(LAYER_TYPE_SOFTWARE, null);
 
+        final int DEFAULT_COLOR_PRIMARY = 0xFF4BD763;
+        final int DEFAULT_COLOR_PRIMARY_DARK = 0xFF3AC652;
+
         TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.SwitchView);
         colorPrimary = a.getColor(R.styleable.SwitchView_primaryColor, DEFAULT_COLOR_PRIMARY);
         colorPrimaryDark = a.getColor(R.styleable.SwitchView_primaryColorDark, DEFAULT_COLOR_PRIMARY_DARK);
+        colorOff = a.getColor(R.styleable.SwitchView_offColor, 0xFFE3E3E3);
+        colorOffDark = a.getColor(R.styleable.SwitchView_offColorDark, 0xFFBFBFBF);
+        colorShadow = a.getColor(R.styleable.SwitchView_shadowColor, 0xFF333333);
+        ratioAspect = a.getFloat(R.styleable.SwitchView_ratioAspect, 0.68f);
         hasShadow = a.getBoolean(R.styleable.SwitchView_hasShadow, true);
         isOpened = a.getBoolean(R.styleable.SwitchView_isOpened, false);
         state = isOpened ? STATE_SWITCH_ON : STATE_SWITCH_OFF;
@@ -97,15 +101,25 @@ public class SwitchView extends View {
                     if (primaryColorDarkTypedValue.data > 0)
                         colorPrimaryDark = primaryColorDarkTypedValue.data;
                 }
-            } catch (Exception e) {
-                e.printStackTrace();
+            } catch (Exception ignore) {
             }
         }
     }
 
     public void setColor(int newColorPrimary, int newColorPrimaryDark) {
+        setColor(newColorPrimary, newColorPrimaryDark, colorOff, colorOffDark);
+    }
+
+    public void setColor(int newColorPrimary, int newColorPrimaryDark, int newColorOff, int newColorOffDark) {
+        setColor(newColorPrimary, newColorPrimaryDark, newColorOff, newColorOffDark, colorShadow);
+    }
+
+    public void setColor(int newColorPrimary, int newColorPrimaryDark, int newColorOff, int newColorOffDark, int newColorShadow) {
         colorPrimary = newColorPrimary;
         colorPrimaryDark = newColorPrimaryDark;
+        colorOff = newColorOff;
+        colorOffDark = newColorOffDark;
+        colorShadow = newColorShadow;
         invalidate();
     }
 
@@ -171,8 +185,7 @@ public class SwitchView extends View {
         if (heightMode == MeasureSpec.EXACTLY) {
             resultHeight = heightSize;
         } else {
-            int selfExpectedResultHeight = (int) (resultWidth * RATIO_ASPECT) + getPaddingTop() + getPaddingBottom();
-            resultHeight = selfExpectedResultHeight;
+            resultHeight = (int) (resultWidth * ratioAspect) + getPaddingTop() + getPaddingBottom();
             if (heightMode == MeasureSpec.AT_MOST) {
                 resultHeight = Math.min(resultHeight, heightSize);
             }
@@ -183,42 +196,42 @@ public class SwitchView extends View {
     @Override
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
         super.onSizeChanged(w, h, oldw, oldh);
-        mWidth = w;
-        mHeight = h;
-        isCanVisibleDrawing = mWidth > getPaddingLeft() + getPaddingRight() && mHeight > getPaddingTop() + getPaddingBottom();
+
+        isCanVisibleDrawing = w > getPaddingLeft() + getPaddingRight() && h > getPaddingTop() + getPaddingBottom();
 
         if (isCanVisibleDrawing) {
-            int actuallyDrawingAreaWidth = mWidth - getPaddingLeft() - getPaddingRight();
-            int actuallyDrawingAreaHeight = mHeight - getPaddingTop() - getPaddingBottom();
+            int actuallyDrawingAreaWidth = w - getPaddingLeft() - getPaddingRight();
+            int actuallyDrawingAreaHeight = h - getPaddingTop() - getPaddingBottom();
 
-            if (actuallyDrawingAreaWidth * RATIO_ASPECT < actuallyDrawingAreaHeight) {
+            int actuallyDrawingAreaLeft;
+            int actuallyDrawingAreaRight;
+            int actuallyDrawingAreaTop;
+            int actuallyDrawingAreaBottom;
+            if (actuallyDrawingAreaWidth * ratioAspect < actuallyDrawingAreaHeight) {
                 actuallyDrawingAreaLeft = getPaddingLeft();
-                actuallyDrawingAreaRight = mWidth - getPaddingRight();
-                int heightExtraSize = (int) (actuallyDrawingAreaHeight - actuallyDrawingAreaWidth * RATIO_ASPECT);
+                actuallyDrawingAreaRight = w - getPaddingRight();
+                int heightExtraSize = (int) (actuallyDrawingAreaHeight - actuallyDrawingAreaWidth * ratioAspect);
                 actuallyDrawingAreaTop = getPaddingTop() + heightExtraSize / 2;
                 actuallyDrawingAreaBottom = getHeight() - getPaddingBottom() - heightExtraSize / 2;
             } else {
-                int widthExtraSize = (int) (actuallyDrawingAreaWidth - actuallyDrawingAreaHeight / RATIO_ASPECT);
+                int widthExtraSize = (int) (actuallyDrawingAreaWidth - actuallyDrawingAreaHeight / ratioAspect);
                 actuallyDrawingAreaLeft = getPaddingLeft() + widthExtraSize / 2;
                 actuallyDrawingAreaRight = getWidth() - getPaddingRight() - widthExtraSize / 2;
                 actuallyDrawingAreaTop = getPaddingTop();
                 actuallyDrawingAreaBottom = getHeight() - getPaddingBottom();
             }
 
-            shadowReservedHeight = (int) ((actuallyDrawingAreaBottom - actuallyDrawingAreaTop) * 0.09f);
-            sLeft = actuallyDrawingAreaLeft;
-            sTop = actuallyDrawingAreaTop + shadowReservedHeight;
+            shadowReservedHeight = (int) ((actuallyDrawingAreaBottom - actuallyDrawingAreaTop) * 0.07f);
+            float sLeft = actuallyDrawingAreaLeft;
+            float sTop = actuallyDrawingAreaTop + shadowReservedHeight;
             sRight = actuallyDrawingAreaRight;
-            sBottom = actuallyDrawingAreaBottom - shadowReservedHeight;
+            float sBottom = actuallyDrawingAreaBottom - shadowReservedHeight;
 
-            sWidth = sRight - sLeft;
-            sHeight = sBottom - sTop;
+            float sHeight = sBottom - sTop;
             sCenterX = (sRight + sLeft) / 2;
             sCenterY = (sBottom + sTop) / 2;
 
             bLeft = sLeft;
-            bTop = sTop;
-            bBottom = sBottom;
             bWidth = sBottom - sTop;
             bRight = sLeft + bWidth;
             final float halfHeightOfS = bWidth / 2; // OfB
@@ -245,12 +258,16 @@ public class SwitchView extends View {
 
             bRectF.left = bLeft;
             bRectF.right = bRight;
-            bRectF.top = bTop + bStrokeWidth / 2;
-            bRectF.bottom = bBottom - bStrokeWidth / 2;
+            bRectF.top = sTop + bStrokeWidth / 2;  // bTop = sTop
+            bRectF.bottom = sBottom - bStrokeWidth / 2; // bBottom = sBottom
             float bCenterX = (bRight + bLeft) / 2;
-            float bCenterY = (bBottom + bTop) / 2;
+            float bCenterY = (sBottom + sTop) / 2;
 
-            shadowGradient = new RadialGradient(bCenterX, bCenterY, bRadius, 0xff000000, 0x00000000, Shader.TileMode.CLAMP);
+            int red = colorShadow >> 16 & 0xFF;
+            int green = colorShadow >> 8 & 0xFF;
+            int blue = colorShadow & 0xFF;
+            shadowGradient = new RadialGradient(bCenterX, bCenterY, bRadius, Color.argb(200, red, green, blue),
+                    Color.argb(25, red, green, blue), Shader.TileMode.CLAMP);
         }
     }
 
@@ -278,7 +295,7 @@ public class SwitchView extends View {
             case 2:
                 if (state == STATE_SWITCH_ON) {
                     result = bOnLeftX - (bOnLeftX - bOffLeftX) * percent; // off2 -> on
-                } else if (state == STATE_SWITCH_ON) {
+                } else if (state == STATE_SWITCH_ON2) {
                     result = bOn2LeftX - (bOn2LeftX - bOffLeftX) * percent;  // off -> on2
                 }
                 break;
@@ -323,11 +340,11 @@ public class SwitchView extends View {
         final boolean isOn = (state == STATE_SWITCH_ON || state == STATE_SWITCH_ON2);
         // Draw background
         paint.setStyle(Paint.Style.FILL);
-        paint.setColor(isOn ? colorPrimary : 0xffE3E3E3);
+        paint.setColor(isOn ? colorPrimary : colorOff);
         canvas.drawPath(sPath, paint);
 
-        sAnim = sAnim - ANIMATION_SPEED > 0 ? sAnim - ANIMATION_SPEED : 0;
-        bAnim = bAnim - ANIMATION_SPEED > 0 ? bAnim - ANIMATION_SPEED : 0;
+        sAnim = sAnim - animationSpeed > 0 ? sAnim - animationSpeed : 0;
+        bAnim = bAnim - animationSpeed > 0 ? bAnim - animationSpeed : 0;
 
         final float dsAnim = interpolator.getInterpolation(sAnim);
         final float dbAnim = interpolator.getInterpolation(bAnim);
@@ -347,7 +364,6 @@ public class SwitchView extends View {
         // Use center bar path to draw shadow
         if (hasShadow) {
             paint.setStyle(Paint.Style.FILL);
-            paint.setColor(0xFF333333);
             paint.setShader(shadowGradient);
             canvas.drawPath(bPath, paint);
             paint.setShader(null);
@@ -360,7 +376,7 @@ public class SwitchView extends View {
         canvas.drawPath(bPath, paint);
         paint.setStyle(Paint.Style.STROKE);
         paint.setStrokeWidth(bStrokeWidth * 0.5f);
-        paint.setColor(isOn ? colorPrimaryDark : 0xFFBFBFBF);
+        paint.setColor(isOn ? colorPrimaryDark : colorOffDark);
         canvas.drawPath(bPath, paint);
         canvas.restore();
 
@@ -441,8 +457,7 @@ public class SwitchView extends View {
         invalidate();
     }
 
-    @SuppressLint("ParcelCreator")
-    static final class SavedState extends BaseSavedState {
+    private static final class SavedState extends BaseSavedState {
         private boolean isOpened;
 
         SavedState(Parcelable superState) {
@@ -459,6 +474,23 @@ public class SwitchView extends View {
             super.writeToParcel(out, flags);
             out.writeInt(isOpened ? 1 : 0);
         }
-    }
 
+        // fixed by Night99 https://github.com/g19980115
+        @Override
+        public int describeContents() {
+            return 0;
+        }
+
+        public static final Creator<SavedState> CREATOR = new Creator<SavedState>() {
+            @Override
+            public SavedState createFromParcel(Parcel in) {
+                return new SavedState(in);
+            }
+
+            @Override
+            public SavedState[] newArray(int size) {
+                return new SavedState[size];
+            }
+        };
+    }
 }

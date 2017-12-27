@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -18,14 +17,13 @@
             android:layout_height="?attr/actionBarSize"
             android:background="?attr/colorPrimary"
             app:navigationIcon="@mipmap/common_back_white"
-            app:title="基本API"/>
+            app:title="基本API" />
 
     </android.support.design.widget.AppBarLayout>
 
 
-    <ScrollView
+    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/v_scroll"
-        xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#FFFFFF"
@@ -45,7 +43,7 @@
                 android:background="@android:color/darker_gray"
                 android:padding="6dip"
                 android:text="以下为切换SwitchView状态所提供的4个API\n随便都点击几下应该都懂的\n可以直接在xml里面设置app:isOpened='true'初始化状态"
-                android:textColor="#FFFFFF"/>
+                android:textColor="#FFFFFF" />
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -61,7 +59,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="10dip"
-                    app:isOpened="true"/>
+                    app:isOpened="true" />
 
                 <Button
                     android:id="@+id/b_1_1"
@@ -69,7 +67,7 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@id/v_switch_1"
                     android:text="setOpened(true)"
-                    android:textAllCaps="false"/>
+                    android:textAllCaps="false" />
 
                 <Button
                     android:id="@+id/b_1_2"
@@ -78,7 +76,7 @@
                     android:layout_below="@id/v_switch_1"
                     android:layout_toRightOf="@id/b_1_1"
                     android:text="setOpened(false)"
-                    android:textAllCaps="false"/>
+                    android:textAllCaps="false" />
 
                 <Button
                     android:id="@+id/b_1_3"
@@ -86,7 +84,7 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@id/b_1_1"
                     android:text="toggleSwitch(true)"
-                    android:textAllCaps="false"/>
+                    android:textAllCaps="false" />
 
                 <Button
                     android:id="@+id/b_1_4"
@@ -95,7 +93,7 @@
                     android:layout_below="@id/b_1_1"
                     android:layout_toRightOf="@id/b_1_3"
                     android:text="toggleSwitch(false)"
-                    android:textAllCaps="false"/>
+                    android:textAllCaps="false" />
 
             </RelativeLayout>
 
@@ -106,7 +104,7 @@
                 android:background="@android:color/darker_gray"
                 android:padding="6dip"
                 android:text="按钮阴影\n可以直接在xml里面设置app:hasShadow='false'初始化状态"
-                android:textColor="#FFFFFF"/>
+                android:textColor="#FFFFFF" />
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -121,7 +119,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="10dip"
-                    app:hasShadow="false"/>
+                    app:hasShadow="false" />
 
                 <Button
                     android:id="@+id/b_2_1"
@@ -129,7 +127,7 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@id/v_switch_2"
                     android:text="setShadow(true)"
-                    android:textAllCaps="false"/>
+                    android:textAllCaps="false" />
 
                 <Button
                     android:id="@+id/b_2_2"
@@ -138,7 +136,7 @@
                     android:layout_below="@id/v_switch_2"
                     android:layout_toRightOf="@id/b_2_1"
                     android:text="setShadow(false)"
-                    android:textAllCaps="false"/>
+                    android:textAllCaps="false" />
 
             </RelativeLayout>
 
@@ -148,7 +146,7 @@
                 android:background="@android:color/darker_gray"
                 android:padding="6dip"
                 android:text="颜色 需要设置2个颜色[默认会取theme->colorPrimary]没有取到会使用绿色风格\n可以在xml中设置app:primaryColor='#FFE51C23' app:primaryColorDark='#FFDD191D' 初试化颜色"
-                android:textColor="#FFFFFF"/>
+                android:textColor="#FFFFFF" />
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -163,7 +161,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="10dip"
-                    app:isOpened="true"/>
+                    app:isOpened="true" />
 
                 <ch.ielse.view.SwitchView
                     android:layout_width="wrap_content"
@@ -172,7 +170,7 @@
                     android:layout_toRightOf="@+id/v_switch_3"
                     app:isOpened="true"
                     app:primaryColor="#FFE51C23"
-                    app:primaryColorDark="#FFDD191D"/>
+                    app:primaryColorDark="#FFDD191D" />
 
                 <Button
                     android:id="@+id/b_3_1"
@@ -181,7 +179,7 @@
                     android:layout_below="@id/v_switch_3"
                     android:background="#FF4FC3F7"
                     android:text="0xFF4FC3F7\nclick here"
-                    android:textAllCaps="false"/>
+                    android:textAllCaps="false" />
 
                 <Button
                     android:id="@+id/b_3_2"
@@ -192,7 +190,7 @@
                     android:layout_toRightOf="@id/b_3_1"
                     android:background="#FF546E7A"
                     android:text="0xFF546E7A\nclick here"
-                    android:textAllCaps="false"/>
+                    android:textAllCaps="false" />
 
                 <Button
                     android:id="@+id/b_3_3"
@@ -203,11 +201,30 @@
                     android:layout_toRightOf="@id/b_3_2"
                     android:background="#FFFFC400"
                     android:text="0xFFFFC400\nclick here"
-                    android:textAllCaps="false"/>
-
+                    android:textAllCaps="false" />
             </RelativeLayout>
 
-        </LinearLayout>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:color/darker_gray"
+                android:padding="6dip"
+                android:text="补充\n设置关闭时颜色 可以在xml中设置\napp:offColor='#FFF73E45' app:offColorDark='#FFE62D34' \n设置阴影颜色\napp:shadowColor='#FFFFC400'"
+                android:textColor="#FFFFFF" />
 
+            <ch.ielse.view.SwitchView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="12dp"
+                android:layout_marginTop="10dp"
+                app:isOpened="false"
+                app:offColor="#FFF73E45"
+                app:offColorDark="#FFE62D34"
+                app:primaryColor="#FFE51C23"
+                app:primaryColorDark="#FFDD191D"
+                app:shadowColor="#FFFFC400" />
+
+
+        </LinearLayout>
     </ScrollView>
 </LinearLayout>

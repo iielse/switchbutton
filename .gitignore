@@ -1,8 +1,10 @@
+*.svn
 *.iml
-.gradle
+.idea/
+.gradle/
+build/
 /local.properties
-/.idea/workspace.xml
-/.idea/libraries
 .DS_Store
-/build
-/captures
+captures/
+.externalNativeBuild
+import-summary.txt

@@ -8,17 +8,20 @@
 [DemoApp.apk](https://github.com/iielse/SwitchButton/blob/master/previews/app-debug.apk)
 
 ## Usage
-1. Include the library as local library project.
+1. add library
 
-`compile 'ch.ielse:switchbutton:1.0.0'`
+`compile 'ch.ielse:switchbutton:1.0.1'`
 
-2. in your layout.xml
+2. xml
 ```
 <ch.ielse.view.SwitchView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
 ```
-3.in your activity
+3. activity
+
+![](https://github.com/iielse/SwitchButton/blob/master/previews/a.png)
+
 ```
 switchView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -28,6 +31,10 @@ switchView.setOnClickListener(new View.OnClickListener() {
         });
 ```
 or
+
+![](https://github.com/iielse/SwitchButton/blob/master/previews/b.png)
+![](https://github.com/iielse/SwitchButton/blob/master/previews/c.png)
+
 ```
 switchView.setOnStateChangedListener(new SwitchView.OnStateChangedListener() {
             @Override
@@ -42,12 +49,22 @@ switchView.setOnStateChangedListener(new SwitchView.OnStateChangedListener() {
         });
 ```
 
+## Attributes
+| attr | description |
+|:---|:---|
+| hasShadow | 是否显示按钮阴影 |
+| primaryColor | 开启状态背景色 |
+| primaryColorDark| 开启状态按钮描边色 |
+| offColor | 关闭状态描边色 |
+| offColorDark | 关闭状态按钮描边色 |
+| shadowColor | 按钮阴影色 |
+| ratioAspect | 按钮宽高形状比率(0,1] 不推荐大幅度调整 |
+| isOpened | 初始化默认状态 |
+
+
 
 ## Appreciation
 * [aigeStudio](http://blog.csdn.net/aigestudio)
-
-## Contact
-QQ Group : 274306954
 
 ##Others
 hope you like my work. `Star` support me a lot. thanks
