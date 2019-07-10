@@ -134,7 +134,7 @@ public class SwitchView extends View {
         colorOffDark = newColorOffDark;
         colorShadow = newColorShadow;
         colorBar = newColorBar;
-        colorBackgorund = newColorBackground;
+        colorBackground = newColorBackground;
         invalidate();
     }
 
