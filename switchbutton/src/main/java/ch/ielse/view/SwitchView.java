@@ -49,6 +49,8 @@ public class SwitchView extends View {
     protected int colorOff;
     protected int colorOffDark;
     protected int colorShadow;
+    protected int colorBar;
+    protected int colorBackground;
     protected boolean hasShadow;
     protected boolean isOpened;
 
@@ -83,6 +85,8 @@ public class SwitchView extends View {
         colorOff = a.getColor(R.styleable.SwitchView_offColor, 0xFFE3E3E3);
         colorOffDark = a.getColor(R.styleable.SwitchView_offColorDark, 0xFFBFBFBF);
         colorShadow = a.getColor(R.styleable.SwitchView_shadowColor, 0xFF333333);
+        colorBar = a.getColor(R.styleable.SwitchView_barColor, 0xFFFFFFFF);
+        colorBackground = a.getColor(R.styleable.SwitchView_bgColor, 0xFFFFFFFF);
         ratioAspect = a.getFloat(R.styleable.SwitchView_ratioAspect, 0.68f);
         hasShadow = a.getBoolean(R.styleable.SwitchView_hasShadow, true);
         isOpened = a.getBoolean(R.styleable.SwitchView_isOpened, false);
@@ -120,6 +124,17 @@ public class SwitchView extends View {
         colorOff = newColorOff;
         colorOffDark = newColorOffDark;
         colorShadow = newColorShadow;
+        invalidate();
+    }
+
+    public void setColor(int newColorPrimary, int newColorPrimaryDark, int newColorOff, int newColorOffDark, int newColorShadow, int newColorBar, int newColorBackground) {
+        colorPrimary = newColorPrimary;
+        colorPrimaryDark = newColorPrimaryDark;
+        colorOff = newColorOff;
+        colorOffDark = newColorOffDark;
+        colorShadow = newColorShadow;
+        colorBar = newColorBar;
+        colorBackgorund = newColorBackground;
         invalidate();
     }
 
@@ -353,7 +368,7 @@ public class SwitchView extends View {
         final float scaleOffset = (sRight - sCenterX - bRadius) * (isOn ? 1 - dsAnim : dsAnim);
         canvas.save();
         canvas.scale(scale, scale, sCenterX + scaleOffset, sCenterY);
-        paint.setColor(0xFFFFFFFF);
+        paint.setColor(colorBackground);
         canvas.drawPath(sPath, paint);
         canvas.restore();
         // To prepare center bar path
@@ -372,7 +387,7 @@ public class SwitchView extends View {
         // draw bar
         canvas.scale(0.98f, 0.98f, bWidth / 2, bWidth / 2);
         paint.setStyle(Paint.Style.FILL);
-        paint.setColor(0xffffffff);
+        paint.setColor(colorBar);
         canvas.drawPath(bPath, paint);
         paint.setStyle(Paint.Style.STROKE);
         paint.setStrokeWidth(bStrokeWidth * 0.5f);

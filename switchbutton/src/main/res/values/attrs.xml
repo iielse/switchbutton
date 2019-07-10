@@ -5,6 +5,8 @@
         <attr name="primaryColorDark" format="color"/>
         <attr name="offColor" format="color"/>
         <attr name="offColorDark" format="color"/>
+        <attr name="barColor" format="color"/>
+        <attr name="bgColor" format="color"/>
         <attr name="shadowColor" format="color"/>
         <attr name="ratioAspect" format="float"/>
         <attr name="isOpened" format="boolean"/>
