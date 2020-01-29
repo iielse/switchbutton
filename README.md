@@ -10,7 +10,7 @@
 ## Usage
 1. add library
 
-`compile 'com.github.iielse.switchbutton:switchbutton:1.0.4'`
+`implementation 'com.github.iielse:switchbutton:1.0.4'`
 
 2. xml
 ```
