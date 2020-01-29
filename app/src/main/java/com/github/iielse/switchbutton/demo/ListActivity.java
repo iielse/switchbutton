@@ -1,8 +1,8 @@
-package ch.ielse.demo;
+package com.github.iielse.switchbutton.demo;
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,7 +14,9 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
-import ch.ielse.view.SwitchView;
+import com.github.iielse.switchbutton.SwitchView;
+
+
 
 public class ListActivity extends AppCompatActivity {
 

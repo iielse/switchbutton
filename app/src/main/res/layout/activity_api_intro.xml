@@ -3,24 +3,15 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-
     android:orientation="vertical">
 
-    <android.support.design.widget.AppBarLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:theme="@style/AppTheme.AppBarOverlay">
-
-        <android.support.v7.widget.Toolbar
+        <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="?attr/colorPrimary"
             app:navigationIcon="@mipmap/common_back_white"
             app:title="基本API" />
-
-    </android.support.design.widget.AppBarLayout>
-
 
     <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/v_scroll"
@@ -54,7 +45,7 @@
                 android:padding="10dip"
                 android:paddingLeft="12dip">
 
-                <ch.ielse.view.SwitchView
+                <com.github.iielse.switchbutton.SwitchView
                     android:id="@+id/v_switch_1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -114,7 +105,7 @@
                 android:padding="10dip"
                 android:paddingLeft="12dip">
 
-                <ch.ielse.view.SwitchView
+                <com.github.iielse.switchbutton.SwitchView
                     android:id="@+id/v_switch_2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -156,14 +147,14 @@
                 android:padding="10dip"
                 android:paddingLeft="12dip">
 
-                <ch.ielse.view.SwitchView
+                <com.github.iielse.switchbutton.SwitchView
                     android:id="@+id/v_switch_3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="10dip"
                     app:isOpened="true" />
 
-                <ch.ielse.view.SwitchView
+                <com.github.iielse.switchbutton.SwitchView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="20dip"
@@ -212,7 +203,7 @@
                 android:text="补充\n设置关闭时颜色 可以在xml中设置\napp:offColor='#FFF73E45' app:offColorDark='#FFE62D34' \n设置阴影颜色\napp:shadowColor='#FFFFC400'"
                 android:textColor="#FFFFFF" />
 
-            <ch.ielse.view.SwitchView
+            <com.github.iielse.switchbutton.SwitchView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="12dp"

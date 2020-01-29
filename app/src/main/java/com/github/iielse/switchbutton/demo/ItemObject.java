@@ -1,4 +1,4 @@
-package ch.ielse.demo;
+package com.github.iielse.switchbutton.demo;
 
 /**
  * Created by LY on 2016/9/13.

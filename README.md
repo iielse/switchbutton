@@ -10,11 +10,11 @@
 ## Usage
 1. add library
 
-`compile 'ch.ielse:switchbutton:1.0.1'`
+`compile 'com.github.iielse.switchbutton:switchbutton:1.0.4'`
 
 2. xml
 ```
-<ch.ielse.view.SwitchView
+<com.github.iielse.switchbutton.SwitchView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
 ```

@@ -1,17 +1,22 @@
-package ch.ielse.demo;
+package com.github.iielse.switchbutton.demo;
 
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
-import android.support.annotation.NonNull;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
+import androidx.annotation.NonNull;
+
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import ch.ielse.view.SwitchView;
+import com.github.iielse.switchbutton.SwitchView;
+
+
+
 
 public class NormalActivity extends AppCompatActivity {
 

@@ -7,12 +7,7 @@
     android:background="#EEEFF3"
     android:orientation="vertical">
 
-    <android.support.design.widget.AppBarLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:theme="@style/AppTheme.AppBarOverlay">
-
-        <android.support.v7.widget.Toolbar
+        <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
@@ -20,10 +15,8 @@
             app:navigationIcon="@mipmap/common_back_white"
             app:title="Recycler(toggleSwitch延时切换状态)"/>
 
-    </android.support.design.widget.AppBarLayout>
 
-
-    <android.support.v7.widget.RecyclerView
+    <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/v_recycler"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>

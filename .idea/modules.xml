@@ -2,9 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/SwitchButton.iml" filepath="$PROJECT_DIR$/SwitchButton.iml" />
+      <module fileurl="file://$PROJECT_DIR$/android-switchbutton.iml" filepath="$PROJECT_DIR$/android-switchbutton.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/switchbutton/switchbutton.iml" filepath="$PROJECT_DIR$/switchbutton/switchbutton.iml" />
+      <module fileurl="file://$PROJECT_DIR$/switchbutton/switchbutton-switchbutton.iml" filepath="$PROJECT_DIR$/switchbutton/switchbutton-switchbutton.iml" />
     </modules>
   </component>
 </project>

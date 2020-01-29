@@ -7,21 +7,13 @@
     android:background="#EEEFF3"
     android:orientation="vertical">
 
-    <android.support.design.widget.AppBarLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:theme="@style/AppTheme.AppBarOverlay">
-
-        <android.support.v7.widget.Toolbar
+        <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="?attr/colorPrimary"
             app:navigationIcon="@mipmap/common_back_white"
             app:title="设置"/>
-
-    </android.support.design.widget.AppBarLayout>
-
 
     <ScrollView
         android:id="@+id/v_scroll"
@@ -68,7 +60,7 @@
                     android:layout_weight="1"/>
 
 
-                <ch.ielse.view.SwitchView
+                <com.github.iielse.switchbutton.SwitchView
                     android:id="@+id/v_launcher_voice"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -121,7 +113,7 @@
                     android:visibility="gone"/>
 
 
-                <ch.ielse.view.SwitchView
+                <com.github.iielse.switchbutton.SwitchView
                     android:id="@+id/v_push_able"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

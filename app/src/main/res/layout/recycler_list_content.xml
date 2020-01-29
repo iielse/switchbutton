@@ -18,7 +18,7 @@
         android:layout_height="0dip"
         android:layout_weight="1"/>
 
-    <ch.ielse.view.SwitchView
+    <com.github.iielse.switchbutton.SwitchView
         android:id="@+id/v_switch"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>

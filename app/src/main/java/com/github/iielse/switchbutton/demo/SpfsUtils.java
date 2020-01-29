@@ -1,4 +1,4 @@
-package ch.ielse.demo;
+package com.github.iielse.switchbutton.demo;
 
 import android.content.Context;
 import android.content.SharedPreferences;

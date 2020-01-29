@@ -4,23 +4,15 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-
     android:orientation="vertical">
 
-    <android.support.design.widget.AppBarLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:theme="@style/AppTheme.AppBarOverlay">
-
-        <android.support.v7.widget.Toolbar
+        <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="?attr/colorPrimary"
             app:navigationIcon="@mipmap/common_back_white"
             app:title="关于尺寸大小的说明"/>
-
-    </android.support.design.widget.AppBarLayout>
 
 
     <ScrollView
@@ -52,7 +44,7 @@
                     android:layout_height="wrap_content"
                     android:background="#CCC">
 
-                    <ch.ielse.view.SwitchView
+                    <com.github.iielse.switchbutton.SwitchView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"/>
                 </FrameLayout>
@@ -72,7 +64,7 @@
                     android:layout_below="@+id/t_2_1"
                     android:background="#CCC">
 
-                    <ch.ielse.view.SwitchView
+                    <com.github.iielse.switchbutton.SwitchView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"/>
                 </FrameLayout>
@@ -91,7 +83,7 @@
                     android:layout_below="@+id/t_2_2"
                     android:background="#CCC">
 
-                    <ch.ielse.view.SwitchView
+                    <com.github.iielse.switchbutton.SwitchView
                         android:layout_width="100dip"
                         android:layout_height="100dip"/>
                 </FrameLayout>
@@ -118,22 +110,22 @@
                 android:orientation="horizontal"
                 android:padding="10dip">
 
-                <ch.ielse.view.SwitchView
+                <com.github.iielse.switchbutton.SwitchView
                     android:layout_width="30dip"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="10dip"/>
 
-                <ch.ielse.view.SwitchView
+                <com.github.iielse.switchbutton.SwitchView
                     android:layout_width="40dip"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="10dip"/>
 
-                <ch.ielse.view.SwitchView
+                <com.github.iielse.switchbutton.SwitchView
                     android:layout_width="50dip"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="10dip"/>
 
-                <ch.ielse.view.SwitchView
+                <com.github.iielse.switchbutton.SwitchView
                     android:layout_width="60dip"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="10dip"/>
@@ -153,7 +145,7 @@
                 android:layout_margin="10dip"
                 android:background="#0FC">
 
-                <ch.ielse.view.SwitchView
+                <com.github.iielse.switchbutton.SwitchView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:padding="20dip"/>

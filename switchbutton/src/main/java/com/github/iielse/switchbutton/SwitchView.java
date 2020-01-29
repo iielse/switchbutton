@@ -1,4 +1,4 @@
-package ch.ielse.view;
+package com.github.iielse.switchbutton;
 
 import android.annotation.TargetApi;
 import android.content.Context;
