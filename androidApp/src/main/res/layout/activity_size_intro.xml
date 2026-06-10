@@ -6,18 +6,18 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"
-            app:navigationIcon="@mipmap/common_back_white"
-            app:title="关于尺寸大小的说明"/>
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:paddingTop="25dp"
+        android:layout_height="80dp"
+        android:background="?attr/colorPrimary"
+        app:navigationIcon="@mipmap/common_back_white"
+        app:title="关于尺寸大小的说明"/>
 
 
     <ScrollView
         android:id="@+id/v_scroll"
-        xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#FFFFFF"

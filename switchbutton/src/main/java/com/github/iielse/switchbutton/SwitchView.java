@@ -1,6 +1,6 @@
 package com.github.iielse.switchbutton;
 
-import android.annotation.TargetApi;
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
@@ -10,7 +10,6 @@ import android.graphics.Path;
 import android.graphics.RadialGradient;
 import android.graphics.RectF;
 import android.graphics.Shader;
-import android.os.Build;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.AttributeSet;
@@ -18,6 +17,8 @@ import android.util.TypedValue;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.animation.AccelerateInterpolator;
+
+import org.jetbrains.annotations.NotNull;
 
 /**
  * hei hei hei
@@ -37,7 +38,7 @@ public class SwitchView extends View {
     private float sAnim, bAnim;
     private RadialGradient shadowGradient;
 
-    protected float ratioAspect = 0.68f; // (0,1]
+    protected float ratioAspect; // (0,1]
     protected float animationSpeed = 0.1f; // (0,1]
 
     private int state;
@@ -71,7 +72,6 @@ public class SwitchView extends View {
         this(context, null);
     }
 
-    @TargetApi(Build.VERSION_CODES.HONEYCOMB)
     public SwitchView(Context context, AttributeSet attrs) {
         super(context, attrs);
         setLayerType(LAYER_TYPE_SOFTWARE, null);
@@ -79,32 +79,30 @@ public class SwitchView extends View {
         final int DEFAULT_COLOR_PRIMARY = 0xFF4BD763;
         final int DEFAULT_COLOR_PRIMARY_DARK = 0xFF3AC652;
 
-        TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.SwitchView);
-        colorPrimary = a.getColor(R.styleable.SwitchView_primaryColor, DEFAULT_COLOR_PRIMARY);
-        colorPrimaryDark = a.getColor(R.styleable.SwitchView_primaryColorDark, DEFAULT_COLOR_PRIMARY_DARK);
-        colorOff = a.getColor(R.styleable.SwitchView_offColor, 0xFFE3E3E3);
-        colorOffDark = a.getColor(R.styleable.SwitchView_offColorDark, 0xFFBFBFBF);
-        colorShadow = a.getColor(R.styleable.SwitchView_shadowColor, 0xFF333333);
-        colorBar = a.getColor(R.styleable.SwitchView_barColor, 0xFFFFFFFF);
-        colorBackground = a.getColor(R.styleable.SwitchView_bgColor, 0xFFFFFFFF);
-        ratioAspect = a.getFloat(R.styleable.SwitchView_ratioAspect, 0.68f);
-        hasShadow = a.getBoolean(R.styleable.SwitchView_hasShadow, true);
-        isOpened = a.getBoolean(R.styleable.SwitchView_isOpened, false);
-        state = isOpened ? STATE_SWITCH_ON : STATE_SWITCH_OFF;
-        lastState = state;
-        a.recycle();
+        try (TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.SwitchView)) {
+            colorPrimary = a.getColor(R.styleable.SwitchView_primaryColor, DEFAULT_COLOR_PRIMARY);
+            colorPrimaryDark = a.getColor(R.styleable.SwitchView_primaryColorDark, DEFAULT_COLOR_PRIMARY_DARK);
+            colorOff = a.getColor(R.styleable.SwitchView_offColor, 0xFFE3E3E3);
+            colorOffDark = a.getColor(R.styleable.SwitchView_offColorDark, 0xFFBFBFBF);
+            colorShadow = a.getColor(R.styleable.SwitchView_shadowColor, 0xFF333333);
+            colorBar = a.getColor(R.styleable.SwitchView_barColor, 0xFFFFFFFF);
+            colorBackground = a.getColor(R.styleable.SwitchView_bgColor, 0xFFFFFFFF);
+            ratioAspect = a.getFloat(R.styleable.SwitchView_ratioAspect, 0.68f);
+            hasShadow = a.getBoolean(R.styleable.SwitchView_hasShadow, true);
+            isOpened = a.getBoolean(R.styleable.SwitchView_isOpened, false);
+            state = isOpened ? STATE_SWITCH_ON : STATE_SWITCH_OFF;
+            lastState = state;
+        }
 
         if (colorPrimary == DEFAULT_COLOR_PRIMARY && colorPrimaryDark == DEFAULT_COLOR_PRIMARY_DARK) {
             try {
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                    TypedValue primaryColorTypedValue = new TypedValue();
-                    context.getTheme().resolveAttribute(android.R.attr.colorPrimary, primaryColorTypedValue, true);
-                    if (primaryColorTypedValue.data > 0) colorPrimary = primaryColorTypedValue.data;
-                    TypedValue primaryColorDarkTypedValue = new TypedValue();
-                    context.getTheme().resolveAttribute(android.R.attr.colorPrimaryDark, primaryColorDarkTypedValue, true);
-                    if (primaryColorDarkTypedValue.data > 0)
-                        colorPrimaryDark = primaryColorDarkTypedValue.data;
-                }
+                TypedValue primaryColorTypedValue = new TypedValue();
+                context.getTheme().resolveAttribute(android.R.attr.colorPrimary, primaryColorTypedValue, true);
+                if (primaryColorTypedValue.data > 0) colorPrimary = primaryColorTypedValue.data;
+                TypedValue primaryColorDarkTypedValue = new TypedValue();
+                context.getTheme().resolveAttribute(android.R.attr.colorPrimaryDark, primaryColorDarkTypedValue, true);
+                if (primaryColorDarkTypedValue.data > 0)
+                    colorPrimaryDark = primaryColorDarkTypedValue.data;
             } catch (Exception ignore) {
             }
         }
@@ -127,6 +125,7 @@ public class SwitchView extends View {
         invalidate();
     }
 
+    @SuppressWarnings("unused")
     public void setColor(int newColorPrimary, int newColorPrimaryDark, int newColorOff, int newColorOffDark, int newColorShadow, int newColorBar, int newColorBackground) {
         colorPrimary = newColorPrimary;
         colorPrimaryDark = newColorPrimaryDark;
@@ -209,8 +208,8 @@ public class SwitchView extends View {
     }
 
     @Override
-    protected void onSizeChanged(int w, int h, int oldw, int oldh) {
-        super.onSizeChanged(w, h, oldw, oldh);
+    protected void onSizeChanged(int w, int h, int oldW, int oldH) {
+        super.onSizeChanged(w, h, oldW, oldH);
 
         isCanVisibleDrawing = w > getPaddingLeft() + getPaddingRight() && h > getPaddingTop() + getPaddingBottom();
 
@@ -334,8 +333,8 @@ public class SwitchView extends View {
             case -3:
                 result = bOffLeftX + (bOnLeftX - bOffLeftX) * percent;  // on -> off
                 break;
-            default: // init
             case 0:
+            default: // init
                 if (state == STATE_SWITCH_OFF) {
                     result = bOffLeftX; //  off -> off
                 } else if (state == STATE_SWITCH_ON) {
@@ -347,7 +346,7 @@ public class SwitchView extends View {
     }
 
     @Override
-    protected void onDraw(Canvas canvas) {
+    protected void onDraw(@NotNull Canvas canvas) {
         super.onDraw(canvas);
         if (!isCanVisibleDrawing) return;
 
@@ -399,6 +398,7 @@ public class SwitchView extends View {
         if (sAnim > 0 || bAnim > 0) invalidate();
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         if ((state == STATE_SWITCH_ON || state == STATE_SWITCH_OFF) && (sAnim * bAnim == 0)) {
@@ -496,7 +496,7 @@ public class SwitchView extends View {
             return 0;
         }
 
-        public static final Creator<SavedState> CREATOR = new Creator<SavedState>() {
+        public static final Creator<SavedState> CREATOR = new Creator<>() {
             @Override
             public SavedState createFromParcel(Parcel in) {
                 return new SavedState(in);

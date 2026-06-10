@@ -10,13 +10,13 @@
 ## Usage
 1. add library
 
-`implementation 'com.github.iielse:switchbutton:1.0.4'`
+`implementation 'com.github.iielse:switchbutton:1.0.5'`
 
 2. xml
 ```
 <com.github.iielse.switchbutton.SwitchView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"/>
 ```
 3. activity
 
@@ -24,11 +24,11 @@
 
 ```
 switchView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                boolean isOpened = switchView.isOpened();
-            }
-        });
+    @Override
+    public void onClick(View v) {
+        boolean isOpened = switchView.isOpened();
+    }
+});
 ```
 or
 
@@ -37,16 +37,16 @@ or
 
 ```
 switchView.setOnStateChangedListener(new SwitchView.OnStateChangedListener() {
-            @Override
-            public void toggleToOn(SwitchView view) {
-                view.toggleSwitch(true); // or false
-            }
+    @Override
+    public void toggleToOn(SwitchView view) {
+        view.toggleSwitch(true); // or false
+    }
 
-            @Override
-            public void toggleToOff(SwitchView view) {
-                view.toggleSwitch(false); // or true
-            }
-        });
+    @Override
+    public void toggleToOff(SwitchView view) {
+        view.toggleSwitch(false); // or true
+    }
+});
 ```
 
 ## Attributes
@@ -60,11 +60,3 @@ switchView.setOnStateChangedListener(new SwitchView.OnStateChangedListener() {
 | shadowColor | 按钮阴影色 |
 | ratioAspect | 按钮宽高形状比率(0,1] 不推荐大幅度调整 |
 | isOpened | 初始化默认状态 |
-
-
-
-## Appreciation
-* [aigeStudio](http://blog.csdn.net/aigestudio)
-
-##Others
-hope you like my work. `Star` support me a lot. thanks

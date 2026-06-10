@@ -1,0 +1,15 @@
+[versions]
+agp = "9.2.1"
+compileSdk = "36"
+minSdk = "21"
+targetSdk = "36"
+appcompat = "1.7.1"
+recyclerview = "1.4.0"
+
+[plugins]
+application = { id = "com.android.application", version.ref = "agp" }
+library = { id = "com.android.library", version.ref = "agp" }
+
+[libraries]
+appcompat = { module = "androidx.appcompat:appcompat", version.ref = "appcompat" }
+recyclerview = { module = "androidx.recyclerview:recyclerview", version.ref = "recyclerview" }

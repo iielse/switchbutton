@@ -7,13 +7,14 @@
     android:background="#EEEFF3"
     android:orientation="vertical">
 
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"
-            app:navigationIcon="@mipmap/common_back_white"
-            app:title="List(即时切换状态)"/>
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:paddingTop="25dp"
+        android:layout_height="80dp"
+        android:background="?attr/colorPrimary"
+        app:navigationIcon="@mipmap/common_back_white"
+        app:title="List(即时切换状态)"/>
 
 
     <ListView

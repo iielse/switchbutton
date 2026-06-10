@@ -7,12 +7,13 @@
     android:background="#FFFFFF"
     android:orientation="vertical">
 
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"
-            app:title="@string/app_name"/>
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:paddingTop="25dp"
+        android:layout_height="80dp"
+        android:background="?attr/colorPrimary"
+        app:title="@string/app_name"/>
 
     <Button
         android:id="@+id/b_api_intro"
